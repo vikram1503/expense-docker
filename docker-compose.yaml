@@ -3,10 +3,16 @@ name: expense
 networks:
   default:
     name: expense
+volumes:
+  mysql:  # docker volume create mysql    
 services:
   mysql:
     image: mysql:v1
     container_name: mysql
+    volumes:
+      - source: mysql
+        target: /var/lib/mysql
+        type: volume # -v volume-name:/path/in/container
   backend:
     image: backend:v1
     container_name: backend
